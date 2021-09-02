@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">{{menu}}</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{menu}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                 <div class="col-12">
+                 <div class="card">
+                            <div class="card-body">
+                            <a href="{% url 'inputrinciannilai' %}" type="button" class="btn btn-primary"><i class="fas fa-pencil-alt"> Tambah Rincian Nilai</i></a>
+                            <br/>
+                                
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Mata Pelajaran</th>
+                                        <th scope="col">Rincian Nilai</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for rcn in datarinciannilai %}
+                                 <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ rcn.nama_mapel }}</td>
+                                        <td>{{ rcn.rincian_nilai }}</td>
+                                        <td><a href="{% url 'updaterinciannilai' rcn.id %}" class="btn btn-success btn-sm">Edit</a></td>
+                                        <td><a href="{% url 'deleterinciannilai' rcn.id %}" class="btn btn-danger btn-sm">Hapus</a}</td>
+                                    </tr>
+                                
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" align="center"> Data Masih Kosong</td>
+                                </tr>
+                                
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                 </div>
+            </div>
+            
+            
+
+{% endblock content %}
+

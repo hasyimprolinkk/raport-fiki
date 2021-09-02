@@ -1,0 +1,31 @@
+from django.urls import path
+from .import views
+
+urlpatterns = [
+    path('', views.beranda, name="beranda"),
+    path('guru/', views.guru, name="guru"),
+    path('inputguru/', views.inputGuru, name="inputguru"),
+    path('updateguru/<str:pk>', views.updateGuru, name='updateguru'),
+    path('deleteguru/<str:pk>', views.deleteGuru, name='deleteguru'),
+    path('mapel/', views.mapel, name="mapel"),
+    path('inputmapel/', views.inputMapel, name="inputmapel"),
+    path('updatemapel/<str:pk>', views.updateMapel, name='updatemapel'),
+    path('deletemapel/<str:pk>', views.deleteMapel, name='deletemapel'),
+    path('rinciannilai/', views.rinciannilai, name="rinciannilai"),
+    path('updaterinciannilai/<str:pk>', views.updateRincianNilai, name='updaterinciannilai'),
+    path('deleterinciannilai/<str:pk>', views.deleteRincianNilai, name='deleterinciannilai'),
+    path('inputrinciannilai/', views.inputRincianNilai, name="inputrinciannilai"),
+    path('siswa/', views.siswa, name="siswa"),
+    path('inputsiswa/', views.inputSiswa, name="inputsiswa"),
+    path('updatesiswa/<str:pk>', views.updateSiswa, name='updatesiswa'),
+    path('deletesiswa/<str:pk>', views.deleteSiswa, name='deletesiswa'),
+    path('login-page/', views.loginPage, name='login'),
+    path('logout/', views.logoutPage, name='logout'),
+    path('nilai/', views.nilai, name="nilai"),
+    path('tambahnilai/', views.inputNilai, name="tambahnilai"),
+    path('deletenilai/<str:pk>', views.deleteNilai, name='deletenilai'),
+    path('cetakraport/', views.cetakRaport, name="cetakraport"),
+    path('cetakraportsaya/', views.cetakRaportSaya, name="cetakraportsaya"),
+    path('export_raport/<str:pk>/<str:semester>', views.pdf_report_create, name='export_raport'),
+    # path('profile/', views.profile, name="profile"),
+]

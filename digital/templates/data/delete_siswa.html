@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<div class="page-wrapper">
+	<!-- ============================================================== -->
+	<!-- Bread crumb and right sidebar toggle -->
+	<!-- ============================================================== -->
+	<div class="page-breadcrumb">
+		<div class="row">
+			<div class="col-12 d-flex no-block align-items-center">
+				<h4 class="page-title">{{menu}}</h4>
+				<div class="ms-auto text-end">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">{{menu}}</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		 <div class="row justify-content-md-center">
+			 <div class="col-md-8">
+				 <div class="card card-body">
+					 <p> Anda yakin ingin menghapus "{{ formhapussiswa }}" ?</p>
+						 <form action="" method="POST">
+							 {% csrf_token %}
+							 <br>
+							 <a class="btn btn-danger" href="{% url 'siswa' %}" role="button">Cancel</a>
+						 <input type="submit" class="btn btn-primary" name="Confirm"/>
+					 </form>
+				 </div>
+			 </div>
+		 </div>
+	</div>
+</div>
+{% endblock content %}

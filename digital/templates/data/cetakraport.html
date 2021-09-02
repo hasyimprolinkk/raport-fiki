@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">{{menu}}</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{menu}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                 <div class="col-12">
+                 <div class="card">
+                            <div class="card-body">
+                                {% if messages %}
+                                {%for pesan in messages %}
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    {{ pesan }}
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">NIS</th>
+                                    <th scope="col">Nama</th>
+                                    
+                                    <th scope="col">Cetak Raport</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for n in datasiswa %}
+                                 <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ n.nis }}</td>
+                                        <td>{{ n.nama }}</td>
+                                        <td>
+                                            <a href="/export_raport/{{ n.id }}/ganjil" class="btn btn-outline-success btn-sm">Semester Ganjil</a>
+                                            <a href="/export_raport/{{ n.id }}/genap" class="btn btn-outline-success btn-sm">Semester Genap</a>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" align="center"> Data Masih Kosong</td>
+                                </tr>
+                                
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                 </div>
+            </div>
+            
+            
+
+{% endblock content %}
+

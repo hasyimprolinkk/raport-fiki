@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">{{menu}}</h4>
+                        <div class="ms-auto text-end">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{menu}}</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                 <div class="col-12">
+                 <div class="card">
+                            <div class="card-body">
+                                {% if messages %}
+                                {%for pesan in messages %}
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    {{ pesan }}
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            <form class="form-horizontal" action="" method="POST">
+                            {% csrf_token %}
+                                <div class="card-body">
+                                    <h4 class="card-title">Form Input Nilai</h4>
+                                    {% comment %} <!-- {{form|crispy}} --> {% endcomment %}
+                                    <div class="form-group mt-3">
+                                        <label>Siswa* : </label>
+                                        {{ form.siswa }}
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label>Kelompok* : </label>
+                                        {{ form.kelompok }}
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label>Semester* : </label>
+                                        {{ form.semester }}
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label>Semester* : </label>
+                                        {{ form.tahun_ajaran }}
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label>Rincian Nilai* : </label>
+                                    </div>
+                                    <table style="width: 100%;" cellpadding="8">
+                                        {% for m in mapel %}
+                                        <tr>
+                                            <td style="width: 10%;">{{ m.nama_mapel }}</td>
+                                            <td style="width: 90%;">
+                                                <select class="form-control" name="rincian_nilai_{{ forloop.counter }}" id="id_rincian_nilai" required>
+                                                    <option selected>-------------</option>
+                                                    {%for n in nilai %}
+                                                        {% ifequal n.nama_mapel|stringformat:"s" m.nama_mapel|stringformat:"s" %}
+                                                                <option value="{{n.id}}">{{n.rincian_nilai}}</option>
+                                                        {% endifequal %}
+                                                    {% endfor %}                                                
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        {%endfor%}
+                                    </table>
+                    
+                                 <div class="border-top">
+                                    <div class="card-body">
+                                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                 </div>
+            </div>
+{% endblock content %}
+

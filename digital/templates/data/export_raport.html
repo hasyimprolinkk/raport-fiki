@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cetak Raport</title>
+    <style type="text/css">
+        body {
+            font-family: arial;
+            font-size: 11pt;
+            width: 8.5in
+        }
+
+        .table {
+            border-collapse: collapse;
+            border: solid 1px #999;
+            width: 100%
+        }
+
+        .table tr td,
+        .table tr th {
+            border: solid 1px #000;
+            padding: 3px;
+        }
+
+        .table tr th {
+            font-weight: bold;
+            text-align: center
+        }
+
+        .rgt {
+            text-align: right;
+        }
+
+        .ctr {
+            text-align: center;
+        }
+
+        .tbl {
+            font-weight: bold
+        }
+
+        table tr td {
+            vertical-align: top
+        }
+
+        .font_kecil {
+            font-size: 12px
+        }
+
+        #mb_judul {
+            margin-bottom: -105px;
+        }
+    </style>
+    <script type="text/javascript">
+        function PrintWindow() {
+            window.print();
+            CheckWindowState();
+        }
+
+        function CheckWindowState() {
+            if (document.readyState == "complete") {
+                window.close();
+            } else {
+                setTimeout("CheckWindowState()", 1000)
+            }
+        }
+        //PrintWindow();
+    </script>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <!-- biar bisa ganti lembar otomatis -->
+        </thead>
+
+        <tbody>
+            <tr>
+                <td colspan="6" style="text-align: center; font-weight: bold">
+                    <h3>LAPORAN PERKEMBANGAN PESERTA DIDIK</h3>
+                    <h3>TK PGRI I BESUK</h3>
+                    <h3>TAHUN PELAJARAN {{ detail.tahun_ajaran }}</h3>
+                </td>
+            </tr>
+            <tr>
+                <br><br>
+            </tr>
+            <tr>
+                <td width=" 20%">Nama Peserta Didik
+                </td>
+                <td width="1%">:</td>
+                <td width="39%" class="tbl">{{ siswa.nama }}</td>
+                <td width="20%">Kelompok</td>
+                <td width="1%">:</td>
+                <td width="19%" class="tbl">{{detail.kelompok}}</td>
+            </tr>
+            <tr>
+                <td>Nomor Induk</td>
+                <td>:</td>
+                <td class="tbl">{{siswa.nis}}</td>
+                <td>Semester</td>
+                <td>:</td>
+                <td class="tbl">{{detail.semester}}</td>
+            </tr>
+
+            <tr>
+                <td colspan="6"><br><br></td>
+            </tr>
+            {% for n in nilai %}
+            <tr>
+                <td colspan="6">
+                    <div style="border: solid 1px; padding: 10px; margin-top: 5px; margin-bottom: 10px;">
+                        <p>
+                            <b>{{n.rincian_nilai.nama_mapel}} : </b><br>
+                            {{n.rincian_nilai.rincian_nilai}}
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <tr><br></tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6">
+                    <br><br>
+                    <table width="100%">
+                        <tr>
+                            <td width="10%"></td>
+                            <td width="20%">
+                                Mengetahui : <br>
+                                Wali Kelas <br>
+                                <br><br><br><br>
+                                <u><b>{{siswa.wali_kelas}}</b></u><br>
+                            </td>
+                            <td width="8%"></td>
+                            <td width="25%">
+                                <br>
+                            </td>
+                            <td width="8%">
+                            </td>
+                            <td width="29%">
+                                Probolinggo,
+                                <br>
+                                Orang Tua/Wali, <br>
+                                <br><br><br><br>
+                                <u>..........................</u>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+
+</html>
