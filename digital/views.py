@@ -117,23 +117,23 @@ def inputGuru(request):
             messages.success(request, 'Password Tidak sama')
             return redirect('inputguru')
         # user
-        user = User.objects.create_user(username=username)
-        user.set_password(password1)
-        user.is_active = True
-        user.save()
-        # user
+        if formguru.is_valid:
+            user = User.objects.create_user(username=username)
+            user.set_password(password1)
+            user.is_active = True
+            user.save()
+            # user
 
+            # Group
+            akses_guru = Group.objects.get(name='guru')
+            user.groups.add(akses_guru)
+            # Group
 
-        # Group
-        akses_guru = Group.objects.get(name='guru')
-        user.groups.add(akses_guru)
-        # Group
-
-        # Guru
-        formsimpanguru = formguru.save()
-        formsimpanguru.user = user
-        formsimpanguru.save()
-        # Guru
+            # Guru
+            formsimpanguru = formguru.save()
+            formsimpanguru.user = user
+            formsimpanguru.save()
+            # Guru
         
         return redirect('guru')
 
